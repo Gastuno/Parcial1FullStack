@@ -43,4 +43,27 @@ router.get('/api/movies/:tmdbId', async (request, response) => {
     }
 })
 
+//REVIEWS//
+
+router.post('/api/movies/:tmdbId/reviews', (request, response) => {
+  const newReview = request.body;
+
+  if (!newReview.score) {
+    return response.status(400).json({ error: 'Error: Elija una puntuación' });
+  }
+  else {
+    newReview.reviewId = (Date.now)
+
+    reviews.push(newReview);
+    response.status(201).json(newReview);
+  }
+})
+
+router.delete('/api/reviews/:reviewId', (request, response) => {
+  const id = request.params.reviewId
+  reviews = reviews.filter(review => review.reviewId !== id)
+
+  response.status(200).end()
+})
+
 module.exports = router
