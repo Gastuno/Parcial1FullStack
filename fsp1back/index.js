@@ -8,6 +8,6 @@ app.use(express.json())
 app.use(morgan('tiny'));
 app.use(router)
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+app.listen(process.env.PORT || 3001, () => {
+  console.log(`Server running on port ${process.env.PORT || 3001}`)
 })

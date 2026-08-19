@@ -1,7 +1,8 @@
 const express = require('express')
+const axios = require('axios')
 const router = express.Router()
 
-router.get('/api/movies/search?:query', async (request, response) => {
+router.get('/api/movies/search', async (request, response) => {
   const query = request.query.q
     try {
         const movies = await axios.get(

@@ -1,8 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.jsx";
-import Detalle from "./Detalle.jsx";
+import Detalle from "./detalle.jsx";
 
 function Router() {
+
+
+
     return (
         <BrowserRouter>
             <Routes>
