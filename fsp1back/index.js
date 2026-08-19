@@ -1,9 +1,13 @@
-const http = require('http')
+const express = require('express')
+const morgan = require('morgan');
 
-const app = http.createServer((request, response) => {
-  response.writeHead(200, { 'Content-Type': 'text/plain' })
-  response.end('Hello World')
+const router = require('./routes/routes')
+const app = express()
+
+app.use(express.json())
+app.use(morgan('tiny'));
+app.use(router)
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
-
-app.listen(PORT)
-console.log(`Server running on port ${PORT}`)
