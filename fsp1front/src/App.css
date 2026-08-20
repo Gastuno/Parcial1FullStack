@@ -62,3 +62,10 @@
   color: var(--text-h);
   font-weight: 600;
 }
+
+.movie-poster {
+  display: block;
+  width: 46px;
+  height: 69px;
+  object-fit: cover;
+}

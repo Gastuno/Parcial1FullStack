@@ -1,30 +1,39 @@
 import { useState } from 'react'
 import './App.css'
+import MovieTable from './MovieGrid.jsx'
+import SearchForm from './SearchForm.jsx'
 
 function App() {
   const [search, setSearch] = useState('')
   const [results, setResults] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [hasSearched, setHasSearched] = useState(false)
 
   async function handleSearch(event) {
     event.preventDefault()
     const query = search.trim()
 
+    if (query === '') {
+      return
+    }
+
     setLoading(true)
     setError('')
 
     try {
-      const response = await fetch(
-        `/api/movies/search?q=${(query)}`,
-      )
+      const response = await fetch(`/api/movies/search?q=${(query)}`)
+
+      if (!response.ok) {
+        throw new Error('Request failed')
+      }
 
       const data = await response.json()
       setResults(data.results || [])
-    } catch {
+    }catch {
       setResults([])
-      return response.status(404).json({ error: 'ERROR encontrando peliculas.' });
-    } finally {
+      setError('ERROR encontrando peliculas.')
+    }finally {
       setLoading(false)
     }
   }
@@ -32,45 +41,18 @@ function App() {
   return (
     <main className="main">
       <h1>Movies</h1>
-      <form className="form" onSubmit={handleSearch}>
-        <div className="search">
-          <input
-            id="search"
-            type="search"
-            placeholder="..."
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-          />
-          <button type="submit" disabled={loading}>
-            {loading ? 'Cargando...' : 'Buscar'}
-          </button>
-        </div>
-      </form>
-
+      <SearchForm
+      search={search}
+        loading={loading}
+        onSearch={handleSearch}
+        onSearchChange={setSearch}
+      />
       {error && <p>{error}</p>}
-      {!loading && !error && (
-        results.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Titulo</th>
-                <th>Año</th>
-                <th>Rating</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.map((movie) => (
-                <tr key={movie.id}>
-                  <td>{movie.title}</td>
-                  <td>{movie.release_date?.slice(0, 4)}</td>
-                  <td>{movie.vote_average?.toFixed(1)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No se encontraron peliculas con ese nombre.</p>
-        )
+      {!loading && !error && results.length > 0 && (
+        <MovieTable movies={results} />
+      )}
+      {!loading && !error && results.length === 0 && (
+        <p>No se encontraron peliculas con ese nombre.</p>
       )}
     </main>
   )

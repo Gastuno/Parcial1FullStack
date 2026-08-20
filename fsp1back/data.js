@@ -8,4 +8,4 @@ let reviews = [
     }
   ]
 
-module.exports = { gastos, categorias }
+module.exports = { reviews }
