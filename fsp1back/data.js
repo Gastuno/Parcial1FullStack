@@ -2,8 +2,8 @@ let reviews = [
     {
         "reviewId": "1",
         "movieId": "1",
-        "Author": "Jorgito",
-        "Score": "5",
+        "author": "Jorgito",
+        "score": "5",
         "comment": "Piola."
     }
   ]

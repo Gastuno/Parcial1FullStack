@@ -3,9 +3,6 @@ import App from "./App.jsx";
 import Detalle from "./detalle.jsx";
 
 function Router() {
-
-
-
     return (
         <BrowserRouter>
             <Routes>

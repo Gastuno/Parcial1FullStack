@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const posterUrl = 'https://image.tmdb.org/t/p/w92'
 
 function MovieGrid({ movies }) {
@@ -17,12 +19,13 @@ function MovieGrid({ movies }) {
             <td>
               {movie.poster_path ? (
                 <img
-                  className="movie-poster"
+                  className="moviePoster"
                   src={`${posterUrl}${movie.poster_path}`}
-                  alt={`Portada de ${movie.title}`}
                 />) : ('N/A')}
             </td>
-            <td>{movie.title}</td>
+            <td>
+              <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+            </td>
             <td>{movie.release_date ? movie.release_date.slice(0, 4) : 'N/A'}</td>
             <td>{movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</td>
           </tr>

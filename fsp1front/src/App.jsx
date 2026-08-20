@@ -40,19 +40,18 @@ function App() {
 
   return (
     <main className="main">
-      <h1>Movies</h1>
+      <h1>CineClub</h1>
       <SearchForm
       search={search}
         loading={loading}
         onSearch={handleSearch}
         onSearchChange={setSearch}
       />
-      {error && <p>{error}</p>}
-      {!loading && !error && results.length > 0 && (
+      {!loading && results.length > 0 && (
         <MovieTable movies={results} />
       )}
-      {!loading && !error && results.length === 0 && (
-        <p>No se encontraron peliculas con ese nombre.</p>
+      {!loading && results.length === 0 && (
+        <p>Busca de entre cientos de peliculas!</p>
       )}
     </main>
   )
