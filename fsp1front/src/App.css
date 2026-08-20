@@ -1,71 +1,160 @@
 .main {
-  width: min(900px, 100%);
+  width: min(980px, 100%);
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 56px 32px 72px;
   box-sizing: border-box;
   text-align: left;
 }
 
 .main h1 {
-  margin: 0 0 24px;
+  margin: 0;
+  color: var(--text-h);
+  font-size: clamp(42px, 8vw, 76px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 0.95;
 }
 
-.main label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
+.form {
+  margin: 32px 0 44px;
 }
 
-.search-controls {
+.search {
   display: flex;
   gap: 8px;
-  margin-bottom: 24px;
+  max-width: 720px;
+  padding: 7px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
 }
 
 .main input {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: 5px;
   box-sizing: border-box;
   font: inherit;
+  color: var(--text-h);
+  background: transparent;
 }
 
 .main input:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
+  outline: none;
 }
 
 .main button {
-  padding: 10px 16px;
+  padding: 11px 22px;
   color: white;
   background: var(--accent);
   border: 0;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   font: inherit;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.main button:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.main button:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 .main table {
   width: 100%;
   border-collapse: collapse;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
 }
 
 .main th,
 .main td {
-  padding: 12px 8px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--border);
   text-align: left;
 }
 
 .main th {
   color: var(--text-h);
+  background: var(--accent-bg);
+  font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
-.movie-poster {
+.main tbody tr {
+  transition: background 0.2s;
+}
+
+.main tbody tr:hover {
+  background: var(--social-bg);
+}
+
+.main tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.main td a {
+  color: var(--text-h);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.main td a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.moviePoster {
   display: block;
-  width: 46px;
-  height: 69px;
+  width: 52px;
+  height: 76px;
+  border-radius: 4px;
   object-fit: cover;
+}
+
+.main > p {
+  padding: 20px 0;
+  color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 36px 16px 48px;
+  }
+
+  .form {
+    margin: 24px 0 32px;
+  }
+
+  .search {
+    padding: 5px;
+  }
+
+  .main button {
+    padding: 10px 14px;
+  }
+
+  .main th,
+  .main td {
+    padding: 10px 8px;
+  }
+
+  .main th:first-child,
+  .main td:first-child {
+    display: none;
+  }
 }
