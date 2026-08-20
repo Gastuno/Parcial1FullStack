@@ -11,27 +11,19 @@ function App() {
     event.preventDefault()
     const query = search.trim()
 
-    if (query === '') {
-      return
-    }
-
     setLoading(true)
     setError('')
 
     try {
       const response = await fetch(
-        `/api/movies/search?q=${encodeURIComponent(query)}`,
+        `/api/movies/search?q=${(query)}`,
       )
-
-      if (!response.ok) {
-        throw new Error('Request failed')
-      }
 
       const data = await response.json()
       setResults(data.results || [])
     } catch {
       setResults([])
-      setError('No se pudieron cargar las peliculas.')
+      return response.status(404).json({ error: 'ERROR encontrando peliculas.' });
     } finally {
       setLoading(false)
     }
@@ -56,13 +48,13 @@ function App() {
       </form>
 
       {error && <p>{error}</p>}
-      {hasSearched && !loading && !error && (
+      {!loading && !error && (
         results.length > 0 ? (
           <table>
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Year</th>
+                <th>Titulo</th>
+                <th>Año</th>
                 <th>Rating</th>
               </tr>
             </thead>
